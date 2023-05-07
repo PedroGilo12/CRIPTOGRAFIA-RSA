@@ -20,7 +20,6 @@ import subprocess
         button.clicked.disconnect(func)
 '''
 
-
 def SetFileForDescript():
     targetfile = str(filedialog.askopenfilename())                      # Abre o contexto de dialogo para seleção do arquivo retorna o caminho do arquivo
     targetFolder = str(os.path.dirname(os.path.abspath(__file__)))      # Armazena o caminho raiz onde o arquivo em python está localizado
@@ -28,12 +27,22 @@ def SetFileForDescript():
     # Confirmo se algum arquivo foi selecionado
     if targetfile != "":
 
+        with open(targetfile) as file:
+            texto = file.readline(10000)
+            file.close()
+
+        texto_array = texto.split(" ")
+
         # Crio o arquivo temporário cript.tmp
         with open("InputFile.tmp", "w") as file:
+            for i in texto_array:
+                print(i)
+                file.write(i + "\n")
+
             file.close()
 
         # Copio os dados do arquivo selecionado para o arquivo cript.tmp
-        shutil.copyfile(targetfile, targetFolder+"\InputFile.tmp")
+        # shutil.copyfile(targetfile, targetFolder+"\InputFile.tmp")
         print(targetfile)
         return
 
@@ -46,7 +55,7 @@ def SetMsgForCript():
 
         try:
             with open("InputFile.tmp", "w") as file:
-                file.write(entrada_usuario)
+                file.write(entrada_usuario.replace("\n", ""))
                 file.close()
 
                 return True
@@ -72,7 +81,7 @@ def SetFileForCript():
         return
 
 def CommandGenerateKey():
-    entrada_usuario = simpledialog.askstring("Gerar chave pública", "Digite dois numeros primos grandes p e q separados por um espaço")
+    entrada_usuario = simpledialog.askstring("Gerar chave pública", "Digite respectivamente 'p' 'q' e 'e' separados por um espaço cada um deles:")
 
     if entrada_usuario != None:
         try:
@@ -132,24 +141,30 @@ def CommandDescript():
 
     entrada_usuario = simpledialog.askstring("Insira os valores", "Digite respectivamente 'p' 'q' e 'e' separados por um espaço cada um deles:")
 
-    targetFolder = str(os.path.dirname(os.path.abspath(__file__)))  
+    try:
+        targetFolder = str(os.path.dirname(os.path.abspath(__file__)))  
 
-    with open(targetFolder+"\pqe.tmp", "w") as file:
-        file.write(entrada_usuario)
-        file.close()
+        with open(targetFolder+"\pqe.tmp", "w") as file:
+            file.write(entrada_usuario)
+            file.close()
 
-    SetFileForDescript()
+        SetFileForDescript()
 
-    os.system(f"cmd /c descript.exe < pqe.tmp")
+        os.system(f"cmd /c descript.exe < pqe.tmp")
 
-    targetfolder = str(filedialog.askdirectory())
-    shutil.copyfile("OutputFile.tmp", targetfolder+"\ArquivoDescriptografado.txt")
+        targetfolder = str(filedialog.askdirectory())
+        shutil.copyfile("OutputFile.tmp", targetfolder+"\ArquivoDescriptografado.txt")
 
-    os.remove("pqe.tmp")
-    os.remove("OutputFile.tmp")
-    os.remove("InputFile.tmp")
-    
-    print("Descriptografado!")
+        os.remove("pqe.tmp")
+        os.remove("OutputFile.tmp")
+        os.remove("InputFile.tmp")
+        
+        print("Descriptografado!")
+
+    except:
+        messagebox.showerror("Error", "Houve um problema com a entrada digitada!")
+
+        print("Entrada vazia")
     return
 
 if __name__ == "__main__":

@@ -42,14 +42,14 @@ int chave_publica(char nome_arquivo[], unsigned long int key[]) {
     }
 }
 
-int modPow(int base, int exponent, int modulus) {
-    int result = 1;
+double modPow(double base, double exponent, double modulus) {
+    double result = 1;
     while (exponent > 0) {
-        if (exponent % 2 == 1) {
-            result = (result * base) % modulus;
+        if (fmod(exponent, 2) == 1) {
+            result = fmod(result * base, modulus);
         }
-        base = (base * base) % modulus;
-        exponent /= 2;
+        base = fmod(base * base, modulus);
+        exponent = floor(exponent / 2);
     }
     return result;
 }
@@ -67,14 +67,21 @@ int criptografar_arquivo(char arquivo_origem[], char arquivo_destino[],unsigned 
         Debug("Arquivo criptografado com sucesso!!");
 
         while(c != EOF) {
-            c = getc(arquivo);
-            double c_int = c;
+            c = fgetc(arquivo);
+            if(c != -1) {
+                printf("Caracter: %d\n", c);
+                double c_int = c;
 
-            c_int = c - 63;
+                if(c != 32){
+                    c_int = c - 63;      
+                } else {
+                    c_int = c - 4;
+                }
 
-            int caracter_criptografado = modPow(c_int, key[0], key[1]);
+                int caracter_criptografado = modPow(c_int, key[0], key[1]);
 
-            fprintf(arquivo_cript, "%d\n", caracter_criptografado);
+                fprintf(arquivo_cript, "%d ", caracter_criptografado);
+            }
         }
 
         fclose(arquivo_cript);
@@ -94,7 +101,7 @@ int main() {
     unsigned long int key[2];
     chave_publica("key_pub.txt", key);
 
-    sprintf(debug, "Chave publica: %d %d ", key[0], key[1]);
+    sprintf(debug, "Chave publica: %ld %ld ", key[0], key[1]);
     Debug(debug);
 
     criptografar_arquivo("InputFile.tmp", "OutputFile.tmp",key);

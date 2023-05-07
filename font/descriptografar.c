@@ -95,9 +95,15 @@ int main()
 
         c = modPow(c, d, n);
 
-        c = c + 63;
+        printf("Caracter: %.lf\n", c);
 
-        if(c != -1){
+        if(c != 28) {
+            c = c + 63;
+        } else {
+            c = c + 4;
+        }
+
+        if(c != 63){
             printf("%d ", (int)c);
             fprintf(arquivo_descript, "%c", (char)c);
         } else {
