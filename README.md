@@ -8,7 +8,7 @@
 ## Objetivo acadêmico
 Projeto apresentado à turma de **Matemática Discreta** do curso de Engenharia da Computação como parte dos requerintes para obtenção da nota AB2.
 
-Doscente: 
+Docente: 
 
 **Bruno Almeida Pimentel**
 
