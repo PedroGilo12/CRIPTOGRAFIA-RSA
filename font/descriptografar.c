@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
+// Algoritmo de euclides extendido
 double ocl(double phi_n, double b, double *x, double *y) 
 {
     if (phi_n == 0) 
@@ -19,6 +20,7 @@ double ocl(double phi_n, double b, double *x, double *y)
     return cl;
 }
 
+// Calcula o inverso modular de dois numeros (D*E)mod(N)
 double inversoMod(double phi_n, double e) // inversoMod = inverso modular
 {
     double x, y;
@@ -35,6 +37,7 @@ double inversoMod(double phi_n, double e) // inversoMod = inverso modular
     }
 }
 
+// Calcula o MDC entre dois numeros
 double mdc(double a, double d) {
     double q = floor(a/d);
     double r = fmod(a,d);
@@ -47,33 +50,39 @@ double mdc(double a, double d) {
     return a2;
 }
 
-double modPow(double base, double exponent, double modulus) {
+// Função que implementa a exponênciação modular
+double modPow(double base, double expoent, double modulo) {
     double result = 1;
-    while (exponent > 0) {
-        if (fmod(exponent, 2) == 1) {
-            result = fmod(result * base, modulus);
+    while (expoent > 0) {
+        if (fmod(expoent, 2) == 1) {
+            result = fmod(result * base, modulo);
         }
-        base = fmod(base * base, modulus);
-        exponent = floor(exponent / 2);
+        base = fmod(base * base, modulo);
+        expoent = floor(expoent / 2);
     }
     return result;
 }
 
 int main()
 {
+    // Recebe as entradas de p q e e
     double p, q, e;
     scanf("%lf %lf %lf", &p, &q, &e);
     
+    // Calcula o N
     double n = (p * q);
 
+    // Calcula o phi(N)
     double phi_n = ((p-1) * (q-1));
     printf("O phi(N) é %lf\n", phi_n);
 
+    // Verifica se e é coprimo de phi(N)
     double res = mdc(phi_n, e);
     printf("O mdc(%lf,%lf) = %lf\n",phi_n, e, res);
     
     double d;
 
+    // Se for coprimo, calcula o d como o inverso modular de emod(phi(N))
     if (res == 1)
     {
         d = inversoMod(e,phi_n);
@@ -85,6 +94,8 @@ int main()
         printf("por favor escolha outro numero cujo mdc dos dois numeros seja igual a 1\n");
     } 
 
+
+    // Abre o arquivo para ser descriptografado
     FILE * cript = fopen("InputFile.tmp", "r");
     FILE * arquivo_descript = fopen("OutputFile.tmp", "w");
  

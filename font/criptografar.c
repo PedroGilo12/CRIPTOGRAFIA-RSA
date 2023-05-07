@@ -5,6 +5,7 @@
 
 #define DEBUG 1
 
+// Função de depuração do código
 void Debug(char msg[]) {
     if(DEBUG) {
         printf("%s\n", msg);
@@ -13,22 +14,25 @@ void Debug(char msg[]) {
     return;
 }
 
+// Função para gerar a chave púbica
 int chave_publica(char nome_arquivo[], unsigned long int key[]) {
 
     Debug("Abrindo arquivo da chave publica...");
 
-    FILE * arquivo = fopen(nome_arquivo, "r");
+    FILE * arquivo = fopen(nome_arquivo, "r"); // Abre o arquivo
 
     if(arquivo != NULL) {
 
         Debug("Arquivo aberto com sucesso!!");
 
+        // Recebe a chave pública
         char key1[1000];
         char key2[1000];
 
         fgets(key1, 1000, arquivo);
         fgets(key2, 1000, arquivo);
 
+        // Converte a chave pública de string para inteiro
         key[0] = atoi(key1);
         key[1] = atoi(key2);
 
@@ -42,18 +46,21 @@ int chave_publica(char nome_arquivo[], unsigned long int key[]) {
     }
 }
 
-double modPow(double base, double exponent, double modulus) {
+
+// Função que implementa a exponênciação modular
+double modPow(double base, double expoent, double modulo) {
     double result = 1;
-    while (exponent > 0) {
-        if (fmod(exponent, 2) == 1) {
-            result = fmod(result * base, modulus);
+    while (expoent > 0) {
+        if (fmod(expoent, 2) == 1) {
+            result = fmod(result * base, modulo);
         }
-        base = fmod(base * base, modulus);
-        exponent = floor(exponent / 2);
+        base = fmod(base * base, modulo);
+        expoent = floor(expoent / 2);
     }
     return result;
 }
 
+// Função para criptografar um arquivo de origem para um arquivo de destino usando as chaves N e E
 int criptografar_arquivo(char arquivo_origem[], char arquivo_destino[],unsigned long int key[]) {
 
     Debug("Abrindo arquivo para ser criptografado...");
@@ -72,6 +79,7 @@ int criptografar_arquivo(char arquivo_origem[], char arquivo_destino[],unsigned 
                 printf("Caracter: %d\n", c);
                 double c_int = c;
 
+                // Vincula cada caracter maiusculo de A a Z + espaço para numeros de 2 a 28
                 if(c != 32){
                     c_int = c - 63;      
                 } else {

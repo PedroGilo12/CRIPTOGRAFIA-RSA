@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+// Função para salvar o arquivo com a chave pública
 int salvar(unsigned int n, unsigned int e, char arquivo[])
 {
     FILE * numeros = fopen(arquivo, "w");
@@ -11,6 +12,7 @@ int salvar(unsigned int n, unsigned int e, char arquivo[])
     fclose(numeros);
 }
 
+// Função para calcular o MDC entre dois numeros
 unsigned int mod(unsigned int a, unsigned int d) {
     unsigned int q = a/d;
     unsigned int r = a%d;
@@ -23,6 +25,7 @@ unsigned int mod(unsigned int a, unsigned int d) {
     return mdc;
 }
 
+// Função para checar se um numero é primo
 int eprimo(unsigned int p) {
     if (p == 2) {
         return 1;
@@ -38,6 +41,7 @@ int eprimo(unsigned int p) {
     return 1;
 }
 
+// Função para checar se o numero "e" é coprimo de phi(N)
 double gerare(unsigned int p, unsigned int q, unsigned int e) {
     unsigned int phin = (p-1)*(q-1);
     
@@ -50,14 +54,13 @@ double gerare(unsigned int p, unsigned int q, unsigned int e) {
     }
 }
 
+// Função para gerar o N = p*q
 unsigned int gerarn(unsigned int p, unsigned int q) //gerando o primeiro numero da chave publica.
 {
     unsigned int n = (p) * (q);
 
     return n;
 }
-
-
 
 int main () //funcao que recebe as entradas e as envia para teste, se aprovadas o codigo continua.
 {
@@ -68,6 +71,7 @@ int main () //funcao que recebe as entradas e as envia para teste, se aprovadas 
 
     printf("Gerando chave publica...\n p: %d, q: %d, e: %d\n", p, q, e);
 
+    // Cadeia de decisão que verifica se os numeros  p, q e e são válidos
     if(eprimo(p))
     {
 
