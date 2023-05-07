@@ -9,13 +9,19 @@
 Projeto apresentado à turma de **Matemática Discreta** do curso de Engenharia da Computação como parte dos requerintes para obtenção da nota AB2.
 
 Doscente: 
+
 **Bruno Almeida Pimentel**
 
 Discentes: 
+
 **Jader Neto**
+
 **Pedro H. B. Rocha**
+
 **Pedro H. V. Giló**
+
 **Ronald Lopes**
+
 **F. Samuel O. P. dos Santos**
 
 
