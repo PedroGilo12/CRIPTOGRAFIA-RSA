@@ -8,16 +8,16 @@
 ## Objetivo acadêmico
 Projeto apresentado à turma de **Matemática Discreta** do curso de Engenharia da Computação como parte dos requerintes para obtenção da nota AB2.
 
-Doscente: **
-Bruno Almeida Pimentel**
+Doscente: 
+**Bruno Almeida Pimentel**
 
-Discentes: **
-Jader Neto
-Pedro H. B. Rocha
-Pedro H. V. Giló
-Ronald Lopes
-F. Samuel O. P. dos Santos
-**
+Discentes: 
+**Jader Neto**
+**Pedro H. B. Rocha**
+**Pedro H. V. Giló**
+**Ronald Lopes**
+**F. Samuel O. P. dos Santos**
+
 
 ## Objetivo do projeto
 Desenvolver um programa na linguagem de programação C que realize a seguinte tarefa:
