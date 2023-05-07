@@ -2,7 +2,8 @@
 
 # Projeto de criptografia RSA
 **Universidade Federal de Alagoas - UFAL | Instituto de Computação - IC**
-![logo ic](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNPGP1-X6-ZdUjSoAhxZec1qapbhjjnJ6Q4w&usqp=CAU)
+
+![logo ic](suportfiles/logo-ic.png)
 
 ## Objetivo acadêmico
 Projeto apresentado à turma de **Matemática Discreta** do curso de Engenharia da Computação como parte dos requerintes para obtenção da nota AB2.
